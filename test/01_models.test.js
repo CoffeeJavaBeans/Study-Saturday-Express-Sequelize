@@ -25,7 +25,7 @@ describe('Models', function() {
       student = Student.build({
         firstName,
         lastName,
-        email,
+        email
       });
     });
 
@@ -37,7 +37,7 @@ describe('Models', function() {
     });
 
     describe('attributes definition', () => {
-      xit('includes `firstName`, `lastName`, and `email` fields', () => {
+      it('includes `firstName`, `lastName`, and `email` fields', () => {
         return student.save().then(savedStudent => {
           expect(savedStudent.firstName).to.equal('Peter');
           expect(savedStudent.lastName).to.equal('Parker');
@@ -45,7 +45,7 @@ describe('Models', function() {
         });
       });
 
-      xit('requires `firstName`', () => {
+      it('requires `firstName`', () => {
         student.firstName = null;
         return student.validate().then(
           () => {
@@ -98,7 +98,7 @@ describe('Models', function() {
         newStudent = Student.build({
           firstName: 'charles',
           lastName: 'xavier',
-          email: 'charlie@brainy.com',
+          email: 'charlie@brainy.com'
         });
       });
 
@@ -121,14 +121,14 @@ describe('Models', function() {
     beforeEach(() => {
       test = Test.build({
         subject,
-        grade,
+        grade
       });
     });
 
     afterEach(() => {
       return Promise.all([
         Test.truncate({ cascade: true }),
-        Student.truncate({ cascade: true }),
+        Student.truncate({ cascade: true })
       ]);
     });
 
@@ -167,11 +167,11 @@ describe('Models', function() {
         const newStudent = Student.create({
           firstName: 'Pepper',
           lastName: 'Potts',
-          email: 'pp@salsa.com',
+          email: 'pp@salsa.com'
         });
         const newTest = Test.create({
           subject: 'sword-sharpening',
-          grade: 100,
+          grade: 100
         });
         return Promise.all([newStudent, newTest])
           .spread((createdStudent, createdTest) => {
@@ -180,7 +180,7 @@ describe('Models', function() {
           .then(() => {
             return Test.findOne({
               where: { subject: 'sword-sharpening' },
-              include: { model: Student, as: 'student' },
+              include: { model: Student, as: 'student' }
             });
           })
           .then(foundTest => {
